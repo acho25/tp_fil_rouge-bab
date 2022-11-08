@@ -6,7 +6,7 @@
 
     <persistence-unit name="bab" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>fr.univtln.bab.project.personne.Personne</class>
+        <class>fr.univtln.bab.project.entities.Personne</class>
 
         <properties>
             <!-- Les paramètres de connexions -->

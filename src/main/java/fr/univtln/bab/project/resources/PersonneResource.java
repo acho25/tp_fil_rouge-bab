@@ -1,8 +1,8 @@
-package fr.univtln.bab.project;
+package fr.univtln.bab.project.resources;
 
 
 import fr.univtln.bab.project.daos.PersonneDAO;
-import fr.univtln.bab.project.personne.Personne;
+import fr.univtln.bab.project.entities.Personne;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -13,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("personnes")
-
 public class PersonneResource {
     PersonneDAO personneDAO = new PersonneDAO();
     EntityManagerFactory emf = Persistence
