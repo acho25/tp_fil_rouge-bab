@@ -8,11 +8,13 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
 @Entity
-@Table
+@Table(name = "Adresse", uniqueConstraints = {@UniqueConstraint(name = "uniqueAdresse",columnNames = ("personne_id"))})
 public class Adresse extends Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,17 +29,8 @@ public class Adresse extends Entite {
     String pays;
     @Setter
     @JsonIdentityReference(alwaysAsId = true)
-    @OneToOne(mappedBy = "adresse")
+    @OneToOne
+    @JoinColumn(name = "PERSONNE_ID",referencedColumnName = "ID")
     Personne personne;
 
-    public Adresse(String rue, String ville, int codePostal, String pays, Personne personne) {
-        this.rue = rue;
-        this.ville = ville;
-        this.codePostal = codePostal;
-        this.pays = pays;
-        this.personne = personne;
-    }
-
-    public Adresse() {
-    }
 }

@@ -7,8 +7,11 @@ import lombok.experimental.FieldDefaults;
 
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@DiscriminatorValue("E")
 @ToString
 @Entity
 @Table
@@ -24,12 +27,4 @@ public class Entraineur extends Personne{
     @OneToOne(mappedBy = "entraineur")
     Equipe equipe;
 
-    public Entraineur(String prenom, String nom, Adresse adresse, int nbrDeCoups, Equipe equipe) {
-        super(prenom, nom, adresse);
-        this.nbrDeCoups = nbrDeCoups;
-        this.equipe = equipe;
-    }
-
-    public Entraineur() {
-    }
 }

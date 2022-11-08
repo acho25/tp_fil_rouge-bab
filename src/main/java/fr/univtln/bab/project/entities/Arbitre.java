@@ -7,8 +7,11 @@ import lombok.experimental.FieldDefaults;
 
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@DiscriminatorValue("A")
 @ToString
 @Entity
 @Table
@@ -25,11 +28,4 @@ public class Arbitre extends Personne{
     @JoinColumn(name = "MATCH_ID")
     Match match;
 
-    public Arbitre(String prenom, String nom, Adresse adresse, String poste) {
-        super(prenom, nom, adresse);
-        this.poste = poste;
-    }
-
-    public Arbitre() {
-    }
 }

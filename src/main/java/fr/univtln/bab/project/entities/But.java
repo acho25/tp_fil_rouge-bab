@@ -7,11 +7,13 @@ import lombok.experimental.FieldDefaults;
 
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
 @Entity
-@Table
+@Table(name = "But", uniqueConstraints = {@UniqueConstraint(name = "uniqueBut",columnNames = ("joueur_id"))})
 public class But extends Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +26,4 @@ public class But extends Entite {
     @JoinColumn(name = "JOUEUR_ID")
     Joueur joueur;
 
-
-    public But(String style, Joueur joueur) {
-        this.style = style;
-        this.joueur = joueur;
-    }
-
-    public But() {
-    }
 }

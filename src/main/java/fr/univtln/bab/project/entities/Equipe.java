@@ -4,16 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
 import java.util.List;
 
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
 @Entity
-@Table
-public class Equipe extends Entite{
+@Table(name = "Equipe", uniqueConstraints = {@UniqueConstraint(name = "uniqueEquipe", columnNames = {"nomEquipe", "entraineur_id",
+})})
+public class Equipe extends Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -21,7 +25,8 @@ public class Equipe extends Entite{
     String nomEquipe;
     @Setter
     @JsonIdentityReference(alwaysAsId = true)
-    @OneToOne(mappedBy = "equipe")
+    @OneToOne
+    @JoinColumn(name = "ENTRAINEUR_ID", referencedColumnName = "ID")
     Entraineur entraineur;
     @Setter
     @ToString.Exclude
@@ -33,12 +38,4 @@ public class Equipe extends Entite{
     @JoinColumn(name = "MATCH_ID")
     Match match;
 
-    public Equipe(String nomEquipe, Entraineur entraineur, List<Joueur> joueurs) {
-        this.nomEquipe = nomEquipe;
-        this.entraineur = entraineur;
-        this.joueurs = joueurs;
-    }
-
-    public Equipe() {
-    }
 }

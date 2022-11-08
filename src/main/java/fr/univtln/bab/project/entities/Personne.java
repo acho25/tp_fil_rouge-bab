@@ -8,13 +8,14 @@ import jakarta.persistence.*;
 
 
 @Getter
-@Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="personne_type")
 @Entity
 @Table
-public class Personne extends Entite {
+public abstract class Personne extends Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -24,17 +25,7 @@ public class Personne extends Entite {
     String nom;
     @Setter
     @JsonIdentityReference(alwaysAsId = true)
-    @OneToOne(mappedBy = "personne")
+    @OneToOne(mappedBy = "personne", cascade = {CascadeType.ALL})
     Adresse adresse;
-
-    public Personne(String prenom, String nom, Adresse adresse) {
-        this.prenom = prenom;
-        this.nom = nom;
-        this.adresse = adresse;
-    }
-
-    public Personne() {
-
-    }
 
 }

@@ -9,7 +9,6 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-
 import java.util.ArrayList;
 import java.util.List;
 

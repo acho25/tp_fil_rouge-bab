@@ -12,6 +12,8 @@ import java.util.List;
 @Table
 @Builder
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
@@ -37,15 +39,5 @@ public class Match extends Entite {
     @ManyToMany(mappedBy = "matches", cascade = {CascadeType.ALL})
     List<Joueur> joueurs;
 
-    public Match(int nbrSpectateurs, Date date, List<Arbitre> arbitres, List<Equipe> equipes, List<Joueur> joueurs) {
-        this.nbrSpectateurs = nbrSpectateurs;
-        this.date = date;
-        this.arbitres = arbitres;
-        this.equipes = equipes;
-        this.joueurs = joueurs;
-    }
-
-    public Match() {
-    }
 
 }

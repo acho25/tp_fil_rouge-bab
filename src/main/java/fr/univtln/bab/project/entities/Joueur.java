@@ -10,10 +10,13 @@ import java.util.List;
 @Getter
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@DiscriminatorValue("J")
 @ToString
 @Entity
-@Table
+@Table(name = "Joueur", uniqueConstraints = {@UniqueConstraint(name = "uniqueJoueur",columnNames = {"numero","position"})})
 public class Joueur extends Personne{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,14 +42,4 @@ public class Joueur extends Personne{
             inverseJoinColumns = {@JoinColumn(name = "MATCH_ID")})
     List<Match> matches;
 
-    public Joueur(int numero, String postion, Equipe equipe, List<But> buts, List<Match> matches) {
-        this.numero = numero;
-        this.postion = postion;
-        this.equipe = equipe;
-        this.buts = buts;
-        this.matches = matches;
-    }
-
-    public Joueur() {
-    }
 }
