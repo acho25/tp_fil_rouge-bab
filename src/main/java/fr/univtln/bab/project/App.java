@@ -69,11 +69,11 @@ public class App {
         personne1.setPrenom("Acho");
 
         Personne personne2 = Entraineur.builder().build();
-        personne2.setNom("abder");
-        personne2.setPrenom("Bou");
+        personne2.setNom("ahmad");
+        personne2.setPrenom("ait");
 
         Equipe equipe = Equipe.builder().build();
-        equipe.setNomEquipe("real");
+        equipe.setNomEquipe("psg");
 
         List<Joueur> joueurs = new ArrayList<>();
         joueurs.add((Joueur) personne);

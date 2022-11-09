@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Objects;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -28,4 +30,15 @@ public class Arbitre extends Personne{
     @JoinColumn(name = "MATCH_ID")
     Match match;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Arbitre arbitre)) return false;
+        return  getPoste().equals(arbitre.getPoste()) && Objects.equals(getMatch(), arbitre.getMatch());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPoste(), getMatch());
+    }
 }

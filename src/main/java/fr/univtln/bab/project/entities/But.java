@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Objects;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -26,4 +28,15 @@ public class But extends Entite {
     @JoinColumn(name = "JOUEUR_ID")
     Joueur joueur;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof But but)) return false;
+        return getStyle().equals(but.getStyle()) && getJoueur().equals(but.getJoueur());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getStyle(), getJoueur());
+    }
 }

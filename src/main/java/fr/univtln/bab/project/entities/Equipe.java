@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Builder
@@ -38,4 +39,15 @@ public class Equipe extends Entite {
     @JoinColumn(name = "MATCH_ID")
     Match match;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Equipe equipe)) return false;
+        return getNomEquipe().equals(equipe.getNomEquipe());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNomEquipe());
+    }
 }

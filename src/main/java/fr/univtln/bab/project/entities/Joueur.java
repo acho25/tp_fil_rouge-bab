@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Builder
@@ -42,4 +43,15 @@ public class Joueur extends Personne{
             inverseJoinColumns = {@JoinColumn(name = "MATCH_ID")})
     List<Match> matches;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Joueur joueur)) return false;
+        return getNumero() == joueur.getNumero() && Objects.equals(getPostion(), joueur.getPostion());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getNumero(), getPostion());
+    }
 }

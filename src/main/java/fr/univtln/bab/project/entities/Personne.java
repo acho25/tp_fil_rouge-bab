@@ -6,6 +6,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -28,4 +30,15 @@ public abstract class Personne extends Entite {
     @OneToOne(mappedBy = "personne", cascade = {CascadeType.ALL})
     Adresse adresse;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Personne personne)) return false;
+        return Objects.equals(getPrenom(), personne.getPrenom()) && Objects.equals(getNom(), personne.getNom());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPrenom(), getNom());
+    }
 }

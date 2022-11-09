@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Objects;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -27,4 +29,15 @@ public class Entraineur extends Personne{
     @OneToOne(mappedBy = "entraineur")
     Equipe equipe;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Entraineur that)) return false;
+        return getEquipe().equals(that.getEquipe());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEquipe());
+    }
 }
