@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="bab" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>fr.univtln.bab.project.entities.Personne</class>
+        <class>fr.univtln.bab.project.entities.Match</class>
+        <class>fr.univtln.bab.project.entities.Arbitre</class>
+        <class>fr.univtln.bab.project.entities.Equipe</class>
+        <class>fr.univtln.bab.project.entities.Entraineur</class>
+        <class>fr.univtln.bab.project.entities.Adresse</class>
+        <class>fr.univtln.bab.project.entities.Joueur</class>
+        <class>fr.univtln.bab.project.entities.But</class>
+
+        <properties>
+            <!-- Les paramètres de connexions -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value="root"/>
+
+            <!-- Les options de générations des tables -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="jakarta.persistence.schema-generation.scripts.action" value="drop-and-create"/>
+            <property name="jakarta.persistence.schema-generation.scripts.create-target" value="sampleCreate.ddl"/>
+            <property name="jakarta.persistence.schema-generation.scripts.drop-target" value="sampleDrop.ddl"/>
+            <!--            <property name="jakarta.persistence.sql-load-script-source" value="insert.sql"/>-->
+
+        </properties>
+    </persistence-unit>
+</persistence>
+
