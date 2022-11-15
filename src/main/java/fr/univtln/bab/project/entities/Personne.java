@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import jakarta.persistence.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Objects;
+
 
 
 @Getter
@@ -17,6 +19,9 @@ import java.util.Objects;
 @DiscriminatorColumn(name="personne_type")
 @Entity
 @Table
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
 public abstract class Personne extends Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +34,7 @@ public abstract class Personne extends Entite {
     @JsonIdentityReference(alwaysAsId = true)
     @OneToOne(mappedBy = "personne", cascade = {CascadeType.ALL})
     Adresse adresse;
+
 
     @Override
     public boolean equals(Object o) {

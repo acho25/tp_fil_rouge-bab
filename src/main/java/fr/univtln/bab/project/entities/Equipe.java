@@ -4,14 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 import java.util.Objects;
 
 @Getter
-@Builder
-@NoArgsConstructor
+@SuperBuilder
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
@@ -34,7 +35,7 @@ public class Equipe extends Entite {
     @OneToMany(mappedBy = "equipe", cascade = {CascadeType.ALL})
     List<Joueur> joueurs;
     @Setter
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "MATCH_ID")
     Match match;
