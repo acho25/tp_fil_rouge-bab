@@ -18,7 +18,7 @@ import java.util.Objects;
 @DiscriminatorValue("J")
 @ToString
 @Entity
-@Table(name = "Joueur", uniqueConstraints = {@UniqueConstraint(name = "uniqueJoueur",columnNames = {"numero","position"})})
+@Table(name = "Joueur", uniqueConstraints = {@UniqueConstraint(name = "uniqueJoueur",columnNames = {"numero"})})
 public class Joueur extends Personne{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +43,7 @@ public class Joueur extends Personne{
             joinColumns = {@JoinColumn(name = "JOUEUR_ID")},
             inverseJoinColumns = {@JoinColumn(name = "MATCH_ID")})
     List<Match> matches;
+
 
 
 

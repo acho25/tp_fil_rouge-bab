@@ -47,4 +47,6 @@ public abstract class Personne extends Entite {
     public int hashCode() {
         return Objects.hash(getPrenom(), getNom());
     }
+
+
 }

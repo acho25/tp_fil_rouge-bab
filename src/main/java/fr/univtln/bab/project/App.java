@@ -10,12 +10,16 @@ import jakarta.persistence.Persistence;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.junit.Assert;
+
 import java.io.IOException;
 import java.net.URI;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.*;
 
 /**
  * Hello world!
@@ -60,7 +64,8 @@ public class App {
                         .rue("rue 1")
                         .ville("ville1")
                         .codePostal(83)
-                        .pays("france").build()).build();
+                        .pays("france").build())
+                .build();
 
 
         Arbitre arbitre1 = Arbitre.builder()
@@ -98,6 +103,7 @@ public class App {
                 .build();
 
 
+
         em.persist(joueur1);
         em.persist(entraineur1);
         em.persist(arbitre1);
@@ -110,7 +116,7 @@ public class App {
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
         System.in.read();
-        server.shutdown();
+        server.shutdownNow();
 
     }
 }
