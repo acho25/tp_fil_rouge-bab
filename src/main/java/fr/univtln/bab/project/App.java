@@ -1,25 +1,26 @@
 package fr.univtln.bab.project;
 
 
-import fr.univtln.bab.project.daos.PersonneDAO;
 import fr.univtln.bab.project.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import org.apache.log4j.Logger;
 import org.glassfish.grizzly.http.server.HttpServer;
+
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.junit.Assert;
 
+import javax.validation.*;
 import java.io.IOException;
 import java.net.URI;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-import static org.hamcrest.CoreMatchers.*;
 
 /**
  * Hello world!
@@ -56,58 +57,65 @@ public class App {
         transac.begin();
 
 
-        Joueur joueur1= Joueur.builder()
-                .nom("ben")
-                .prenom("anass")
-                .numero(1)
-                .adresse(Adresse.builder()
-                        .rue("rue 1")
-                        .ville("ville1")
-                        .codePostal(83)
-                        .pays("france").build())
-                .build();
+        Personne personne = Joueur.builder().build();
+        personne.setNom("anass");
+        personne.setPrenom("Ben");
+        Adresse adresse = Adresse.builder().build();
+        adresse.setRue("rue 1");
+        adresse.setPays("France");
+        adresse.setCodePostal(83);
+        adresse.setPersonne(personne);
+        personne.setAdresse(adresse);
 
+        Personne personne1 = Arbitre.builder().build();
+        personne1.setNom("youness");
+        personne1.setPrenom("Acho");
 
-        Arbitre arbitre1 = Arbitre.builder()
-                .nom("achour")
-                .prenom("youness")
-                .poste("principale")
-                .build();
+        Personne personne2 = Entraineur.builder().build();
+        personne2.setNom("ahmad");
+        personne2.setPrenom("ait");
 
-        Entraineur entraineur1 = Entraineur.builder()
-                .nom("boulaghla")
-                .prenom("abderrazzak")
-                .build();
+        Equipe equipe = Equipe.builder().build();
+        equipe.setNomEquipe("psg");
 
         List<Joueur> joueurs = new ArrayList<>();
-        joueurs.add(joueur1);
+        joueurs.add((Joueur) personne);
+
+        Match match = Match.builder().build();
+        match.setJoueurs(joueurs);
+        match.setDate(Date.from(Instant.now()));
+        match.setNbrSpectateurs(100);
         List<Arbitre> arbitres = new ArrayList<>();
-        arbitres.add(arbitre1);
+        arbitres.add((Arbitre) personne1);
+        match.setArbitres(arbitres);
 
-        Equipe equipe = Equipe.builder().nomEquipe("psg")
-                .entraineur(entraineur1)
-                .joueurs(joueurs)
-                .match(Match.builder()
-                        .joueurs(joueurs)
-                        .date(Date.from(Instant.now()))
-                        .nbrSpectateurs(100)
-                        .arbitres(arbitres)
-                        .build())
-                .build();
+        equipe.setMatch(match);
+        equipe.setEntraineur((Entraineur) personne2);
+
+        But but = But.builder().build();
+        but.setJoueur((Joueur) personne);
+
+        equipe.setJoueurs(joueurs);
+
+        List<Match> matches = new ArrayList<>();
+        matches.add(match);
+        ((Joueur) personne).setMatches(matches);
+
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
+
+        Set<ConstraintViolation<Personne>> violations = validator.validate(personne);
 
 
+        for (ConstraintViolation<Personne> violation : violations) {
+            System.err.println(violation.getMessage());
+        }
 
-
-        But but = But.builder()
-                .joueur(joueur1)
-                .build();
-
-
-
-        em.persist(joueur1);
-        em.persist(entraineur1);
-        em.persist(arbitre1);
+        em.persist(personne);
+        em.persist(personne2);
+        em.persist(personne1);
         em.persist(equipe);
+        em.persist(match);
         em.persist(but);
         transac.commit();
 
@@ -116,7 +124,7 @@ public class App {
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
         System.in.read();
-        server.shutdownNow();
+        server.stop();
 
     }
 }

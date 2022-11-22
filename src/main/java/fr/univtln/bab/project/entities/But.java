@@ -6,7 +6,13 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
+
+/**
+ *Classe qui représente un but marque par un joueur
+ */
 
 @Getter
 @SuperBuilder
@@ -23,6 +29,9 @@ public class But extends Entite {
     int id;
     @Setter
     String style;
+
+    @Valid
+    @NotNull
     @Setter
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)

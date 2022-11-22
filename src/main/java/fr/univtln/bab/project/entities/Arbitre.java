@@ -6,7 +6,13 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
+
+/**
+ *Classe fille qui représente un arbitre dans un match
+ */
 
 @Getter
 @SuperBuilder
@@ -25,6 +31,8 @@ public class Arbitre extends Personne{
     @Setter
     String poste;
 
+    @Valid
+    @NotNull
     @Setter
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
