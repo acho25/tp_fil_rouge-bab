@@ -1,7 +1,8 @@
 package fr.univtln.bab.project.annotations;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+
 import java.lang.annotation.*;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 @Constraint(validatedBy = CheckPositionValidator.class)
 @Documented
 public @interface CheckPosition {
-    String message() default "Position saisie est non valide\n";
+    String message() default "Position saisie est non valide";
     Class<?> [] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

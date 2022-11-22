@@ -1,7 +1,9 @@
 package fr.univtln.bab.project.annotations;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
+
 
 public class CheckPositionValidator implements ConstraintValidator<CheckPosition, String> {
     @Override

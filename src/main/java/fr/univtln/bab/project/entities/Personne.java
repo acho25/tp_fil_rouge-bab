@@ -4,13 +4,13 @@ package fr.univtln.bab.project.entities;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import fr.univtln.bab.project.annotations.CaseMode;
 import fr.univtln.bab.project.annotations.CheckCase;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import jakarta.persistence.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**

@@ -3,14 +3,14 @@ package fr.univtln.bab.project.entities;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import fr.univtln.bab.project.annotations.CheckPosition;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 

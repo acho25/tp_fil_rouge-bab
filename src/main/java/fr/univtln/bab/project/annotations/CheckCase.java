@@ -1,7 +1,9 @@
 package fr.univtln.bab.project.annotations;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+
+
 import java.lang.annotation.*;
 
 @Target({ElementType.FIELD})
@@ -9,7 +11,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = CheckCaseValidator.class)
 @Documented
 public @interface CheckCase {
-    String message() default "Modifier le format du texte saisi\n";
+    String message() default "Modifier le format du texte saisi";
     Class<?> [] groups() default {};
     Class<? extends Payload>[] payload() default {};
     CaseMode value();
