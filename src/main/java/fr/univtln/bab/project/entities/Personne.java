@@ -2,12 +2,19 @@ package fr.univtln.bab.project.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import fr.univtln.bab.project.annotations.CaseMode;
+import fr.univtln.bab.project.annotations.CheckCase;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import jakarta.persistence.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+/**
+ *Classe mere qui représente une personne avec ses informations principales
+ */
 
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -23,8 +30,12 @@ public abstract class Personne extends Entite {
     int id;
     @Setter
     String prenom;
+    @CheckCase(CaseMode.UPPER)
     @Setter
     String nom;
+
+    @Valid
+    @NotNull
     @Setter
     @JsonIdentityReference(alwaysAsId = true)
     @OneToOne(mappedBy = "personne", cascade = {CascadeType.ALL})

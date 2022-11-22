@@ -5,7 +5,13 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
+
+/**
+ *Classe qui représente un but marque par un joueur
+ */
 
 @Getter
 @Builder
@@ -22,6 +28,9 @@ public class But extends Entite {
     int id;
     @Setter
     String style;
+
+    @Valid
+    @NotNull
     @Setter
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)

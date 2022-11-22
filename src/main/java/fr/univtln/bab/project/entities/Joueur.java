@@ -1,12 +1,21 @@
 package fr.univtln.bab.project.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import fr.univtln.bab.project.annotations.CheckPosition;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
+
+/**
+ *Classe fille qui représente un joueur dans une equipe
+ */
 
 @Getter
 @Builder
@@ -22,19 +31,31 @@ public class Joueur extends Personne{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    @Min(1)
+    @Digits(integer = 2,fraction = 0)
     @Setter
     int numero;
+    @CheckPosition
     @Setter
     String postion;
+
+    @Valid
+    @NotNull
     @Setter
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "EQUIPE_ID")
     Equipe equipe;
+
+    @Valid
+    @NotNull
     @Setter
     @ToString.Exclude
     @OneToMany(mappedBy = "joueur", cascade = {CascadeType.ALL})
     List<But> buts;
+
+    @Valid
+    @NotNull
     @Setter
     @ToString.Exclude
     @ManyToMany(cascade = {CascadeType.ALL})

@@ -5,7 +5,13 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
+
+/**
+ *Classe qui représente un entraineur d'une equipe
+ */
 
 @Getter
 @Builder
@@ -24,6 +30,8 @@ public class Entraineur extends Personne{
     @Setter
     int nbrDeCoups;
 
+    @NotNull
+    @Valid
     @Setter
     @JsonIdentityReference(alwaysAsId = true)
     @OneToOne(mappedBy = "entraineur")

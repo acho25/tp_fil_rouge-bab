@@ -5,7 +5,14 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
+
+/**
+ *Classe qui représente les informations d'une adresse d'une personne
+ */
 
 @Getter
 @Setter
@@ -29,6 +36,9 @@ public class Adresse extends Entite {
     int codePostal;
     @Setter
     String pays;
+
+    @Valid
+    @NotNull
     @Setter
     @JsonIdentityReference(alwaysAsId = true)
     @OneToOne

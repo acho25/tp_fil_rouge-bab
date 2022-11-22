@@ -1,23 +1,26 @@
 package fr.univtln.bab.project;
 
 
-import fr.univtln.bab.project.daos.PersonneDAO;
 import fr.univtln.bab.project.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import org.apache.log4j.Logger;
 import org.glassfish.grizzly.http.server.HttpServer;
 
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import javax.validation.*;
 import java.io.IOException;
 import java.net.URI;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 
 /**
  * Hello world!
@@ -55,7 +58,7 @@ public class App {
 
 
         Personne personne = Joueur.builder().build();
-        personne.setNom("Anass");
+        personne.setNom("anass");
         personne.setPrenom("Ben");
         Adresse adresse = Adresse.builder().build();
         adresse.setRue("rue 1");
@@ -97,6 +100,16 @@ public class App {
         List<Match> matches = new ArrayList<>();
         matches.add(match);
         ((Joueur) personne).setMatches(matches);
+
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
+
+        Set<ConstraintViolation<Personne>> violations = validator.validate(personne);
+
+
+        for (ConstraintViolation<Personne> violation : violations) {
+            System.err.println(violation.getMessage());
+        }
 
         em.persist(personne);
         em.persist(personne2);

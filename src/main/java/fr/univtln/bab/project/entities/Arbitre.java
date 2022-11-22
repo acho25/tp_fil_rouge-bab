@@ -5,7 +5,13 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
+
+/**
+ *Classe fille qui représente un arbitre dans un match
+ */
 
 @Getter
 @Builder
@@ -24,6 +30,8 @@ public class Arbitre extends Personne{
     @Setter
     String poste;
 
+    @Valid
+    @NotNull
     @Setter
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)

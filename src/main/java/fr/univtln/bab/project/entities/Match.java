@@ -5,9 +5,17 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
+/**
+ *Classe qui représente un match entre deux equipes
+ */
 
 @Entity
 @Table
@@ -22,18 +30,32 @@ public class Match extends Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    @Min(200)
     @Setter
     int nbrSpectateurs;
+    @NotNull
     @Setter
     Date date;
+
+    @Valid
+    @NotNull
+    @Size(max = 4)
     @Setter
     @ToString.Exclude
     @OneToMany(mappedBy = "match", cascade = {CascadeType.ALL})
     List<Arbitre> arbitres;
+
+    @Valid
+    @NotNull
+    @Size(max = 2)
     @Setter
     @ToString.Exclude
     @OneToMany(mappedBy = "match", cascade = {CascadeType.ALL})
     List<Equipe> equipes;
+
+    @Valid
+    @NotNull
+    @Size(max = 22)
     @Setter
     @ToString.Exclude
     @JsonIdentityReference(alwaysAsId = true)
