@@ -31,7 +31,7 @@ public class Match extends Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    @Min(200)
+    @Min(value= 200)
     @Setter
     int nbrSpectateurs;
     @NotNull

@@ -32,8 +32,7 @@ public class Joueur extends Personne{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    @Min(1)
-    @Digits(integer = 2,fraction = 0)
+    @Min(value = 1)
     @Setter
     int numero;
     @CheckPosition

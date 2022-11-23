@@ -58,10 +58,10 @@ public class App {
 
 
         Joueur joueur1= Joueur.builder()
-                .nom("ben")
+                .nom("b")
                 .prenom("anass")
-                .numero(1)
-                .postion("REMPLACANT")
+                .numero(0)
+                .postion("mileu")
                 .adresse(Adresse.builder()
                         .rue("rue 1")
                         .ville("ville1")
@@ -101,7 +101,9 @@ public class App {
                 .joueur(joueur1)
                 .build();
 
-
+        /**
+         test des annotations ajoutes
+         **/
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
 
