@@ -4,6 +4,7 @@ package fr.univtln.bab.project.entities;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import fr.univtln.bab.project.annotations.CaseMode;
 import fr.univtln.bab.project.annotations.CheckCase;
+import fr.univtln.bab.project.annotations.PersonneValidation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -17,7 +18,7 @@ import java.util.Objects;
  *Classe mere qui représente une personne avec ses informations principales
  */
 
-
+@PersonneValidation
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)

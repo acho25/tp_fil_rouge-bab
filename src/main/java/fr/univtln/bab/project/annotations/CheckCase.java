@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = CheckCaseValidator.class)
 @Documented
 public @interface CheckCase {
-    String message() default "Modifier le format du texte saisi";
+    String message() default "{org.hibernate.validator.constraints.CheckCase.message}";
     Class<?> [] groups() default {};
     Class<? extends Payload>[] payload() default {};
     CaseMode value();

@@ -11,7 +11,7 @@ import java.util.List;
 @Constraint(validatedBy = CheckPositionValidator.class)
 @Documented
 public @interface CheckPosition {
-    String message() default "Position saisie est non valide";
+    String message() default "{org.hibernate.validator.constraints.CheckPosition.message}";
     Class<?> [] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
