@@ -39,7 +39,6 @@ public class Equipe extends Entite {
     String nomEquipe;
 
     @Valid
-    @NotNull
     @Setter
     @JsonIdentityReference(alwaysAsId = true)
     @OneToOne
@@ -47,7 +46,6 @@ public class Equipe extends Entite {
     Entraineur entraineur;
 
     @Valid
-    @NotNull
     @Size(max = 14)
     @Setter
     @ToString.Exclude
@@ -55,7 +53,6 @@ public class Equipe extends Entite {
     List<Joueur> joueurs;
 
     @Valid
-    @NotNull
     @Setter
     @ManyToOne(cascade = {CascadeType.ALL})
     @JsonIdentityReference(alwaysAsId = true)

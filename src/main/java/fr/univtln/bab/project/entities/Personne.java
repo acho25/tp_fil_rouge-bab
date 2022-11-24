@@ -41,7 +41,6 @@ public abstract class Personne extends Entite {
     String nom;
 
     @Valid
-    @NotNull
     @Setter
     @JsonIdentityReference(alwaysAsId = true)
     @OneToOne(mappedBy = "personne", cascade = {CascadeType.ALL})

@@ -39,7 +39,6 @@ public class Adresse extends Entite {
     String pays;
 
     @Valid
-    @NotNull
     @Setter
     @JsonIdentityReference(alwaysAsId = true)
     @OneToOne
