@@ -48,76 +48,7 @@ public class App {
 
 
     public static void main(String[] args) throws IOException {
-        EntityManagerFactory emf = Persistence
-                .createEntityManagerFactory("bab");
-        EntityManager em = emf.createEntityManager();
 
-
-        EntityTransaction transac = em.getTransaction();
-        transac.begin();
-
-
-        Joueur joueur1= Joueur.builder()
-                .nom("ben")
-                .prenom("anass")
-                .numero(1)
-                .postion("REMPLACANT")
-                .adresse(Adresse.builder()
-                        .rue("rue 1")
-                        .ville("ville1")
-                        .codePostal(83)
-                        .pays("france").build()).build();
-
-
-        Arbitre arbitre1 = Arbitre.builder()
-                .nom("achour")
-                .prenom("youness")
-                .poste("principale")
-                .build();
-
-        Entraineur entraineur1 = Entraineur.builder()
-                .nom("boulaghla")
-                .prenom("abderrazzak")
-                .build();
-
-        List<Joueur> joueurs = new ArrayList<>();
-        joueurs.add(joueur1);
-        List<Arbitre> arbitres = new ArrayList<>();
-        arbitres.add(arbitre1);
-
-        Equipe equipe = Equipe.builder().nomEquipe("psg")
-                .entraineur(entraineur1)
-                .joueurs(joueurs)
-                .match(Match.builder()
-                        .joueurs(joueurs)
-                        .date(Date.from(Instant.now()))
-                        .nbrSpectateurs(100)
-                        .arbitres(arbitres)
-                        .build())
-                .build();
-
-
-        But but = But.builder()
-                .joueur(joueur1)
-                .build();
-
-
-        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-        Validator validator = validatorFactory.getValidator();
-
-        Set<ConstraintViolation<Equipe>> violations = validator.validate(equipe);
-
-        for (ConstraintViolation c:violations) {
-            System.err.println(c.getMessage());
-        }
-
-
-        em.persist(joueur1);
-        em.persist(entraineur1);
-        em.persist(arbitre1);
-        em.persist(equipe);
-        em.persist(but);
-        transac.commit();
 
 
         final HttpServer server = startServer();
