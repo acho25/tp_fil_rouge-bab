@@ -40,5 +40,4 @@ jobs:
     needs: maven-build
     steps:
       - name: Run Sonar
-        uses: actions/setup-java@v3
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
