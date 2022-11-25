@@ -14,7 +14,8 @@ public class CheckPositionValidator implements ConstraintValidator<CheckPosition
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
         if (s == null) return false;
         for (PostionMode p:PostionMode.values()) {
-            return p.toString().equals(s);
+            if(p.toString().equals(s))
+                return p.toString().equals(s);
         }
         return false;
     }

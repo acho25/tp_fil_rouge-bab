@@ -34,12 +34,11 @@ public class Match extends Entite {
     @Min(value= 200)
     @Setter
     int nbrSpectateurs;
-    @NotNull
+
     @Setter
     Date date;
 
     @Valid
-    @NotNull
     @Size(max = 4)
     @Setter
     @ToString.Exclude
@@ -47,7 +46,6 @@ public class Match extends Entite {
     List<Arbitre> arbitres;
 
     @Valid
-    @NotNull
     @Size(max = 2)
     @Setter
     @ToString.Exclude
@@ -55,7 +53,6 @@ public class Match extends Entite {
     List<Equipe> equipes;
 
     @Valid
-    @NotNull
     @Size(max = 22)
     @Setter
     @ToString.Exclude

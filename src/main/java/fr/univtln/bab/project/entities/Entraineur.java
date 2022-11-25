@@ -32,7 +32,6 @@ public class Entraineur extends Personne{
     @Setter
     int nbrDeCoups;
 
-    @NotNull
     @Valid
     @Setter
     @JsonIdentityReference(alwaysAsId = true)

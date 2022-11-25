@@ -28,4 +28,4 @@ http://localhost:8080/myapp/personnes/person/update/1
 
 
 curl -s -i -X DELETE \
-http://localhost:8080/myapp/personnes/person/delete/1
+-O http://localhost:8080/myapp/personnes/person/delete/1

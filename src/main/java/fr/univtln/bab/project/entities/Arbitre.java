@@ -32,7 +32,6 @@ public class Arbitre extends Personne{
     String poste;
 
     @Valid
-    @NotNull
     @Setter
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)

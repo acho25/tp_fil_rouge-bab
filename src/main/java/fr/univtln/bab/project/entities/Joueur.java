@@ -1,6 +1,8 @@
 package fr.univtln.bab.project.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import fr.univtln.bab.project.annotations.CaseMode;
+import fr.univtln.bab.project.annotations.CheckCase;
 import fr.univtln.bab.project.annotations.CheckPosition;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -36,11 +38,11 @@ public class Joueur extends Personne{
     @Setter
     int numero;
     @CheckPosition
+    @CheckCase(CaseMode.UPPER)
     @Setter
     String postion;
 
     @Valid
-    @NotNull
     @Setter
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
@@ -48,14 +50,12 @@ public class Joueur extends Personne{
     Equipe equipe;
 
     @Valid
-    @NotNull
     @Setter
     @ToString.Exclude
     @OneToMany(mappedBy = "joueur", cascade = {CascadeType.ALL})
     List<But> buts;
 
     @Valid
-    @NotNull
     @Setter
     @ToString.Exclude
     @ManyToMany(cascade = {CascadeType.ALL})

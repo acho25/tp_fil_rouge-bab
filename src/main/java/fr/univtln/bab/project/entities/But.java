@@ -31,7 +31,6 @@ public class But extends Entite {
     String style;
 
     @Valid
-    @NotNull
     @Setter
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
