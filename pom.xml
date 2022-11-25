@@ -6,7 +6,7 @@
 
     <groupId>fr.univtln.bab.project</groupId>
     <artifactId>bab-project</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-DB-SNAPSHOT</version>
     <name>bab-project</name>
 
 
@@ -237,6 +237,12 @@
                     <groupId>com.amashchenko.maven.plugin</groupId>
                     <artifactId>gitflow-maven-plugin</artifactId>
                     <version>1.19.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>3.9.1.2184</version>
                 </plugin>
 
             </plugins>
