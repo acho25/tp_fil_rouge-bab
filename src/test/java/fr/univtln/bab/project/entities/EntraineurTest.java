@@ -57,4 +57,3 @@ class EntraineurTest {
         assertNotEquals(entraineur, new Entraineur());
     }
 }
-

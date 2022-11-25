@@ -34,7 +34,7 @@ class PersonneTest {
 
     @Test
     void getPrenom() {
-        Assert.assertThat(joueur1.getPrenom(),is("ben"));
+        Assert.assertThat(joueur1.getPrenom(),is("anass"));
     }
 
     @Test
