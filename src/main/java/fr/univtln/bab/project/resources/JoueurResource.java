@@ -17,51 +17,49 @@ import java.util.List;
 public class JoueurResource {
 
 
-
-        PersonneDAO personneDAO = new PersonneDAO();
-        EntityManagerFactory emf = Persistence
-                .createEntityManagerFactory("bab");
-        EntityManager em = emf.createEntityManager();
-
-
-        /**
-         * this function returns all the personnes in the db thanks to a curl command
-         */
-        @GET
-        @Produces(MediaType.APPLICATION_JSON)
-        public List<Personne> getPersons(){
-            System.out.println("Personne called");
-
-            List<Personne> joueurs = new ArrayList<>();
-
-            joueurs=personneDAO.findAll();
-
-            return joueurs;
-
-        }
-
-        /**
-         * this function adds a person to the db thanks to a curl command
-         * @param j1 a personne written in json format
-         */
-        @POST
-        @Path("joueur")
-        @Consumes(MediaType.APPLICATION_JSON)
-        public void createJoueur (Joueur j1){
-
-            System.out.println("joueur created");
-            EntityTransaction transac = em.getTransaction();
-            transac.begin();
-            em.persist(j1);
-            transac.commit();
-        }
+    PersonneDAO personneDAO = new PersonneDAO();
+    EntityManagerFactory emf = Persistence
+            .createEntityManagerFactory("bab");
+    EntityManager em = emf.createEntityManager();
 
 
-        /**
-         * this function updates a person using his id thanks to a curl command
-         * @param id the old persons id
-         * @param t the new person
-         */
+    /**
+     * this function returns all the personnes in the db thanks to a curl command
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Personne> getPersons() {
+
+        List<Personne> joueurs;
+
+        joueurs = personneDAO.findAll();
+
+        return joueurs;
+
+    }
+
+    /**
+     * this function adds a person to the db thanks to a curl command
+     *
+     * @param j1 a personne written in json format
+     */
+    @POST
+    @Path("joueur")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createJoueur(Joueur j1) {
+        EntityTransaction transac = em.getTransaction();
+        transac.begin();
+        em.persist(j1);
+        transac.commit();
+    }
+
+
+    /**
+     * this function updates a person using his id thanks to a curl command
+     *
+     * @param id the old persons id
+     * @param t  the new person
+     */
         /*@PUT
         @Path("person/update/{id}")
         @Consumes(MediaType.APPLICATION_JSON)
@@ -74,14 +72,12 @@ public class JoueurResource {
          * this function deletes a person using his id thanks to a curl command
          * @param id a persons id
          */
-
-        @DELETE
-        @Path("joueur/delete/{id}")
-        public void removeperson(@PathParam("id") final int id){
-            personneDAO.remove(personneDAO.find(id));
-
-        }
-
-
+    @DELETE
+    @Path("joueur/delete/{id}")
+    public void removeperson(@PathParam("id") final int id) {
+        personneDAO.remove(personneDAO.find(id));
 
     }
+
+
+}

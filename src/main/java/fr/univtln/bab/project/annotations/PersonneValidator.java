@@ -4,7 +4,7 @@ import fr.univtln.bab.project.entities.Personne;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import java.lang.annotation.Annotation;
+import java.util.Objects;
 
 public class PersonneValidator implements ConstraintValidator<PersonneValidation, Personne> {
 
@@ -14,8 +14,7 @@ public class PersonneValidator implements ConstraintValidator<PersonneValidation
 
     @Override
     public boolean isValid(Personne personne, ConstraintValidatorContext constraintValidatorContext) {
-        if (personne.getId() > 900) return false;
-        if (personne.getPrenom().length() < 2 || personne.getNom().length() < 2) return false;
+        if (Objects.equals(personne.getPrenom(), personne.getNom())) return false;
         return true;
     }
 }

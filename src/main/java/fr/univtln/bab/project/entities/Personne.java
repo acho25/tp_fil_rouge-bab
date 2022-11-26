@@ -15,22 +15,21 @@ import lombok.experimental.SuperBuilder;
 import java.util.Objects;
 
 /**
- *Classe mere qui représente une personne avec ses informations principales
+ * Classe mere qui représente une personne avec ses informations principales
  */
 
 @PersonneValidation
 @Getter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="personne_type")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "personne_type")
 @Entity
 @Table
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public  class Personne extends Entite {
+public class Personne extends Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -61,8 +60,6 @@ public  class Personne extends Entite {
     public int hashCode() {
         return Objects.hash(getPrenom(), getNom());
     }
-
-
 
 
 }

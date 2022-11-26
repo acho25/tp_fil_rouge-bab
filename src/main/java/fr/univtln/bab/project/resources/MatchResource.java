@@ -5,16 +5,14 @@ import fr.univtln.bab.project.entities.Match;
 import jakarta.persistence.*;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 
 @Path("matches")
 public class MatchResource {
-    @Autowired
+
     MatchDAO matchDAO =new MatchDAO();
     EntityManagerFactory emf = Persistence
             .createEntityManagerFactory("bab");
@@ -27,9 +25,8 @@ public class MatchResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getMatches(){
-        System.out.println("Match called");
 
-        List<Match> matches = new ArrayList<>();
+        List<Match> matches;
 
         matches=matchDAO.findAll();
 
@@ -45,7 +42,6 @@ public class MatchResource {
     @Path("match/create")
     @Consumes(MediaType.APPLICATION_JSON)
     public void creatmatch (Match m1){
-        System.out.println("match created");
         EntityTransaction transac = em.getTransaction();
         transac.begin();
         em.persist(m1);

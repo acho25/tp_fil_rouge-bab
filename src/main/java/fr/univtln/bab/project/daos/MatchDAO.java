@@ -2,12 +2,10 @@ package fr.univtln.bab.project.daos;
 
 import fr.univtln.bab.project.entities.Match;
 import jakarta.persistence.Query;
-import org.springframework.stereotype.Component;
 
-@Component
+
 public class MatchDAO extends GenericDAO<Match>{
     public void updateMatch(int id, Match t) {
-        System.out.printf("??");
         entityManager.getTransaction().begin();
         Query query = entityManager.createQuery(
                 "UPDATE Match h"+
