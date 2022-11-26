@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  * @param <E> generic type for entity
  * @author Wide Factory Team
  */
+@Component
 public abstract class GenericDAO<E> implements DAO<E> {
     /**
      * The name of persist unit (described in persistence.xml)

@@ -25,9 +25,7 @@ import java.util.Objects;
 @Entity
 @Table
 public class Arbitre extends Personne{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+
     @Setter
     String poste;
 

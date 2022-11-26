@@ -31,9 +31,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "Joueur", uniqueConstraints = {@UniqueConstraint(name = "uniqueJoueur",columnNames = {"numero"})})
 public class Joueur extends Personne{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+
     @Min(value = 1)
     @Setter
     int numero;

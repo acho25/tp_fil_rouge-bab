@@ -1,6 +1,7 @@
 package fr.univtln.bab.project.resources;
 
 
+
 import fr.univtln.bab.project.daos.PersonneDAO;
 import fr.univtln.bab.project.entities.Personne;
 import jakarta.persistence.EntityManager;
@@ -46,7 +47,7 @@ public class PersonneResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void creatperson (Personne a1){
 
-        System.out.println("hunter created");
+        System.out.println("person created");
         EntityTransaction transac = em.getTransaction();
         transac.begin();
         em.persist(a1);

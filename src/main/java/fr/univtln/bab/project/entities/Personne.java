@@ -22,25 +22,28 @@ import java.util.Objects;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@ToString
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="personne_type")
 @Entity
 @Table
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public abstract class Personne extends Entite {
+public  class Personne extends Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     @Setter
     String prenom;
-    @CheckCase(CaseMode.UPPER)
+    //@CheckCase(CaseMode.UPPER)
     @Setter
     String nom;
 
-    @Valid
+    @Column(name = "personne_type"/*, insertable = true, updatable = false*/)
+    private String personne_type;
+
+    //@Valid
     @Setter
     @JsonIdentityReference(alwaysAsId = true)
     @OneToOne(mappedBy = "personne", cascade = {CascadeType.ALL})
@@ -58,6 +61,8 @@ public abstract class Personne extends Entite {
     public int hashCode() {
         return Objects.hash(getPrenom(), getNom());
     }
+
+
 
 
 }

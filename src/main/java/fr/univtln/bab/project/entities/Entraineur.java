@@ -22,13 +22,10 @@ import java.util.Objects;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @DiscriminatorValue("E")
-@ToString
 @Entity
 @Table
+@ToString
 public class Entraineur extends Personne{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
     @Setter
     int nbrDeCoups;
 
@@ -49,4 +46,5 @@ public class Entraineur extends Personne{
     public int hashCode() {
         return Objects.hash(getEquipe());
     }
+
 }

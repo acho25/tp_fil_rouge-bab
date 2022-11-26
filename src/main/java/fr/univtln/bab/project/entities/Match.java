@@ -36,6 +36,9 @@ public class Match extends Entite {
     int nbrSpectateurs;
 
     @Setter
+    int score;
+
+    @Setter
     Date date;
 
     @Valid
