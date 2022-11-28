@@ -7,7 +7,7 @@
     <groupId>fr.univtln.bab.project</groupId>
     <artifactId>bab-project</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-DB-Payara-SNAPSHOT</version>
+    <version>1.0-DB-SNAPSHOT</version>
     <modules>
         <module>jpa</module>
         <module>business</module>
