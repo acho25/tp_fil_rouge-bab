@@ -1,0 +1,7 @@
+add-library  /tmp/postgresql.jar
+
+set-hazelcast-configuration --enabled=true --dynamic=true
+
+create-jdbc-connection-pool --datasourceclassname org.postgresql.jdbcx.JdbcDataSource --restype javax.sql.ConnectionPoolDataSource --property password=root:user=root:url="jdbc:postgresql:tcp://db:5432/postgres" POSTGRESQL-pool
+
+create-jdbc-resource --connectionpoolid POSTGRESQL-pool jdbc/postgresql-pool
