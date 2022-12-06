@@ -1,17 +1,10 @@
 package fr.univtln.bab.project.daos;
 
 import fr.univtln.bab.project.entities.Match;
-import jakarta.ejb.Stateless;
+import jakarta.inject.Named;
 import jakarta.persistence.Query;
 
-@Stateless
+@Named
 public class MatchDAO extends GenericDAO<Match>{
-    public void updateMatch(int id, Match t) {
-        Query query = getEntityManager().createQuery(
-                "UPDATE Match h"+
-                        " SET h.score = ?1"+
-                        " WHERE h.id= ?2").setParameter(1,t.getScore()).setParameter(2,id);
-        query.executeUpdate();
-    }
 
 }

@@ -8,6 +8,7 @@ import jakarta.persistence.criteria.Root;
 
 
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 
 
@@ -22,23 +23,31 @@ public abstract class GenericDAO<E> implements DAO<E> {
     /**
      * The entity manager to manage entities with the database
      */
-    @PersistenceContext(unitName="bab")
+    @PersistenceContext(unitName = "bab")
     protected EntityManager entityManager;
 
     /**
      * Used to store the real type of the sub class DAO (avoid to specify in find request)
      */
-    protected final Class<E> type;
+    protected Class<E> type;
 
 
     /**
      * Constructor
      */
     protected GenericDAO() {
-        // Get the real type of the sub class DAO
-        ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
-        this.type = (Class<E>) genericSuperclass.getActualTypeArguments()[0];
+        Class c = getClass();
+        //In case of use with implementation class using raw types (mandatory with EJBs).
+        while (!(c.getGenericSuperclass() instanceof ParameterizedType)) {
+            System.out.println(c);
+            c = c.getSuperclass();
+        }
+        Type t = ((ParameterizedType) c.getGenericSuperclass()).getActualTypeArguments()[0];
+        if (t instanceof ParameterizedType)
+            t = ((ParameterizedType) t).getRawType();
+        type = ((Class) t);
     }
+
 
     public EntityManager getEntityManager() {
         return entityManager;
@@ -57,10 +66,9 @@ public abstract class GenericDAO<E> implements DAO<E> {
      */
     @Override
     public E persist(E entity) {
-        System.out.println("heeeeeeeeeeeeeeeere "+ this.entityManager);
         this.entityManager.persist(entity);
         // Update the entity with modification performed by the database (like auto generated id)
-        this.entityManager.refresh(entity);
+        //this.entityManager.refresh(entity);
         return entity;
     }
 
@@ -98,6 +106,7 @@ public abstract class GenericDAO<E> implements DAO<E> {
      */
     @Override
     public void remove(E entity) {
+        entity = this.entityManager.merge(entity);
         this.entityManager.remove(entity);
     }
 
@@ -143,7 +152,11 @@ public abstract class GenericDAO<E> implements DAO<E> {
 
         TypedQuery<E> allQuery = this.entityManager.createQuery(all);
 
+        allQuery.setFirstResult(0);
+        allQuery.setMaxResults(10);
+
         return allQuery.getResultList();
+
     }
 
 }

@@ -60,5 +60,6 @@ public interface DAO<E>
      * Get all entity from a particular type
      * @return list of entities
      */
+
     List<E> findAll();
 }

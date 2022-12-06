@@ -1,8 +1,8 @@
 package fr.univtln.bab.project.daos;
 
 import fr.univtln.bab.project.entities.Equipe;
-import jakarta.ejb.Stateless;
+import jakarta.inject.Named;
 
-@Stateless
+@Named
 public class EquipeDAO extends GenericDAO<Equipe>{
 }

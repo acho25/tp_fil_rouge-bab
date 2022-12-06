@@ -19,5 +19,15 @@
             <version>1.0-DB-SNAPSHOT</version>
             <type>ejb</type>
         </dependency>
+            <dependency>
+                <groupId>fr.univtln.bab.project</groupId>
+                <artifactId>jpa</artifactId>
+                <version>1.0-DB-SNAPSHOT</version>
+            </dependency>
+
     </dependencies>
+
+    <build>
+        <finalName>rest</finalName>
+    </build>
 </project>
