@@ -1,7 +1,9 @@
 version: '3'
 services:
   payara-full:
-    build: mypayara-full
+    build:
+      context: .
+      dockerfile: mypayara-full/Dockerfile
     environment:
       - ADMIN_PASSWORD=admin
     ports:

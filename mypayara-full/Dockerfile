@@ -1,3 +1,19 @@
+FROM maven:3.8.6-eclipse-temurin-17 as builder
+
+COPY pom.xml /
+
+COPY rest/src /rest/src
+COPY rest/pom.xml /rest/pom.xml
+
+COPY business/src /business/src
+COPY business/pom.xml /business/pom.xml
+
+COPY jpa/src /jpa/src
+COPY jpa/pom.xml /jpa/pom.xml
+
+RUN mvn clean package
+
+
 FROM payara/server-full:6.2022.1-jdk17
 # Download the JDBC driver
 USER root
@@ -10,6 +26,6 @@ RUN apt-get update && \
 USER payara
 
 # this script adds a jdbc connection pool and ressource
-COPY post-boot-commands.asadmin $POSTBOOT_COMMANDS
+COPY mypayara-full/post-boot-commands.asadmin $POSTBOOT_COMMANDS
 
-#COPY myapplication.war $DEPLOY_DIR
+COPY --from=builder /rest/target/rest.war $DEPLOY_DIR/rest.war
