@@ -1,7 +1,10 @@
 # tp_fil_rouge-bab
 tp_fil_rouge-bab created by GitHub Classroom
 
-to start the db : docker compose up
+to start the application you have to run : docker compose up
+
+ps : if you want to check the application is deployed check it in : http://localhost:4848
+
 
 Rest command:
 to get all the personnes : curl -s -D - http://localhost:8080/myapp/personnes
