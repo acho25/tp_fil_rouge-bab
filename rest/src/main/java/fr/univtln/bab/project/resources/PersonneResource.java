@@ -1,52 +1,39 @@
 package fr.univtln.bab.project.resources;
 
-
-import fr.univtln.bab.project.daos.PersonneDAO;
 import fr.univtln.bab.project.entities.Personne;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import fr.univtln.bab.project.services.PersonneBean;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-
 import java.util.List;
 
 
+@ApplicationScoped
+@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+@Consumes(MediaType.APPLICATION_JSON)
 @Path("personnes")
 public class PersonneResource {
-    PersonneDAO personneDAO = new PersonneDAO();
-    EntityManagerFactory emf = Persistence
-            .createEntityManagerFactory("bab");
-    EntityManager em = emf.createEntityManager();
-
+    @Inject
+    PersonneBean personneBean;
 
     /**
      * this function returns all the personnes in the db thanks to a curl command
      */
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Personne> getPersons() {
-        List<Personne> personnes;
-        personnes = personneDAO.findAll();
-
-        return personnes;
-
+    public List<Personne> getPersonnes() {
+        return personneBean.getPersonnes();
     }
 
     /**
      * this function adds a person to the db thanks to a curl command
      *
-     * @param a1 a personne written in json format
+     * @param p1 a personne written in json format
      */
     @POST
-    @Path("person")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void creatperson(Personne a1) {
-        EntityTransaction transac = em.getTransaction();
-        transac.begin();
-        em.persist(a1);
-        transac.commit();
+    @Path("personne")
+    public void createPersonne(Personne p1) {
+        personneBean.ajouterPersonne(p1);
     }
 
 
@@ -54,14 +41,15 @@ public class PersonneResource {
      * this function updates a person using his id thanks to a curl command
      *
      * @param id the old persons id
-     * @param t  the new person
+     * @param p  the new person
      */
     @PUT
-    @Path("person/update/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void updateperson(@PathParam("id") int id, Personne t) {
-        personneDAO.updatepersone(id, t);
-
+    @Path("personne/update/{id}")
+    public void updatePersonne(@PathParam("id") int id, Personne p) {
+        Personne personne = personneBean.getPersonne(id);
+        personne.setNom(p.getNom());
+        personne.setPrenom(p.getPrenom());
+        personneBean.modifierPersonne(personne);
     }
 
     /**
@@ -71,10 +59,9 @@ public class PersonneResource {
      */
 
     @DELETE
-    @Path("person/delete/{id}")
-    public void removeperson(@PathParam("id") final int id) {
-        personneDAO.remove(personneDAO.find(id));
-
+    @Path("personne/delete/{id}")
+    public void removePersonne(@PathParam("id") final int id) {
+        personneBean.supprimerPersonne(personneBean.getPersonne(id));
     }
 
 
