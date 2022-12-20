@@ -1,17 +1,11 @@
 package fr.univtln.bab.project.services;
 
-import fr.univtln.bab.project.daos.JoueurDAO;
 import fr.univtln.bab.project.daos.PersonneDAO;
 import fr.univtln.bab.project.entities.Joueur;
 import fr.univtln.bab.project.entities.Personne;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
-
-import java.util.Set;
+import java.util.List;
 
 @Stateless
 public class PersonneBean {
@@ -23,11 +17,19 @@ public class PersonneBean {
         return personneDAO.find(id);
     }
 
-    public void ajouterPersonne(Personne joueur){
-        personneDAO.persist(joueur);
+    public List<Personne> getPersonnes(){
+        return personneDAO.findAll();
     }
 
-    public void supprimerPersonne(Personne joueur){
-        personneDAO.remove(joueur);
+    public void ajouterPersonne(Personne personne){
+        personneDAO.persist(personne);
+    }
+
+    public void modifierPersonne(Personne personneUpdated){
+        personneDAO.update(personneUpdated);
+    }
+
+    public void supprimerPersonne(Personne personne){
+        personneDAO.remove(personne);
     }
 }

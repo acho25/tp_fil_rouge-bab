@@ -31,7 +31,7 @@ public class JoueurResource {
      * this function returns all the personnes in the db thanks to a curl command
      */
     @GET
-    public List<Joueur> getPersons() {
+    public List<Joueur> getJoueurs() {
         return joueurBean.getJoueurs();
     }
 
@@ -53,8 +53,8 @@ public class JoueurResource {
      * @param j1  the new person
      */
     @PUT
-    @Path("person/update/{id}")
-    public void updateperson(@PathParam("id") int id, Joueur j1) {
+    @Path("joueur/update/{id}")
+    public void updateJoueur(@PathParam("id") int id, Joueur j1) {
         Joueur joueur = joueurBean.getJoueur(id);
         joueur.setNom(j1.getNom());
         joueur.setPrenom(j1.getPrenom());
@@ -70,7 +70,7 @@ public class JoueurResource {
      */
     @DELETE
     @Path("joueur/delete/{id}")
-    public void removeperson(@PathParam("id") final int id) {
+    public void removeJoueur(@PathParam("id") final int id) {
         personneBean.supprimerPersonne(joueurBean.getJoueur(id));
     }
 

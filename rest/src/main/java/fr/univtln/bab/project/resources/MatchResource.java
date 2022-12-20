@@ -1,58 +1,40 @@
 package fr.univtln.bab.project.resources;
 
-import fr.univtln.bab.project.daos.MatchDAO;
 import fr.univtln.bab.project.entities.Match;
-import jakarta.persistence.*;
+import fr.univtln.bab.project.services.MatchBean;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-
 
 import java.util.List;
 
 
 @Path("matches")
 public class MatchResource {
-
-    MatchDAO matchDAO =new MatchDAO();
-    EntityManagerFactory emf = Persistence
-            .createEntityManagerFactory("bab");
-    EntityManager em = emf.createEntityManager();
-
+    @Inject
+    MatchBean matchBean;
 
     /**
      * this function returns all the Matches in the db thanks to a curl command
      */
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getMatches(){
-
-        List<Match> matches;
-
-        matches=matchDAO.findAll();
-
-        return matches.toString();
-
+    public List<Match> getMatches(){
+        return matchBean.getMatchs();
     }
 
     /**
      * this function adds a match to the db thanks to a curl command
-     * @param m1 a match written in json format
+     * @param match a match written in json format
      */
     @POST
     @Path("match/create")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void creatmatch (Match m1){
-        EntityTransaction transac = em.getTransaction();
-        transac.begin();
-        em.persist(m1);
-        transac.commit();
+    public void createMatch (Match match){
+       matchBean.ajouterMatch(match);
     }
 
     @DELETE
     @Path("match/delete/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
     public void deleteMatch(@PathParam("id") int id) {
-        matchDAO.remove(matchDAO.find(id));
+       matchBean.supprimerMatch(matchBean.getMatch(id));
     }
 
 }
