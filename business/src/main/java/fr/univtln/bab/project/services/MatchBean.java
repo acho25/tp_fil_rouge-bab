@@ -4,9 +4,12 @@ import fr.univtln.bab.project.daos.MatchDAO;
 import fr.univtln.bab.project.entities.Match;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
+
 import java.util.List;
 
 @Stateless
+@Named
 public class MatchBean {
 
     @Inject

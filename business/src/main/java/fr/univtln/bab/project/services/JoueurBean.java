@@ -4,11 +4,14 @@ import fr.univtln.bab.project.daos.JoueurDAO;
 import fr.univtln.bab.project.entities.Joueur;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
+
 import java.util.List;
 
 
 @Stateless
-public class JoueurBean {
+@Named
+public class JoueurBean extends Joueur {
 
     @Inject
     private JoueurDAO joueurDAO;

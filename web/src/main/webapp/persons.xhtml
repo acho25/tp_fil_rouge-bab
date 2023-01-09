@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="https://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Ajax Listener</title>
+</h:head>
+<h:body>
+    <h2>Ajax Listener Example</h2>
+    <p:dataTable value="#{personneBean.personnes}" var="personne">
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Person ID"></h:outputText>
+            </f:facet>
+            <h:outputText value="#{personne.id}"></h:outputText>
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Person Name"></h:outputText>
+            </f:facet>
+            <h:outputText value="#{personne.nom}"></h:outputText>
+        </p:column>
+    </p:dataTable>
+</h:body>
+</ui:composition>

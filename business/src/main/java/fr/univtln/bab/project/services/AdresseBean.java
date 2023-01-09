@@ -4,10 +4,21 @@ import fr.univtln.bab.project.daos.AdresseDAO;
 import fr.univtln.bab.project.entities.Adresse;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
 @Stateless
+@Named
 public class AdresseBean {
+    @Setter
+    @Getter
+    private Adresse adresse;
+    public void AdresseBean(){
+        adresse = new Adresse();
+    }
 
     @Inject
     private AdresseDAO adresseDAO;
