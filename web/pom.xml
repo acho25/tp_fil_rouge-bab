@@ -6,7 +6,7 @@
     <parent>
         <groupId>fr.univtln.bab.project</groupId>
         <artifactId>bab-project</artifactId>
-        <version>1.0-DB-SNAPSHOT</version>
+        <version>1.0-DB-UnitTesting-SNAPSHOT</version>
     </parent>
     <packaging>war</packaging>
 
@@ -17,13 +17,13 @@
         <dependency>
             <groupId>fr.univtln.bab.project</groupId>
             <artifactId>business</artifactId>
-            <version>1.0-DB-SNAPSHOT</version>
+            <version>1.0-DB-UnitTesting-SNAPSHOT</version>
             <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>fr.univtln.bab.project</groupId>
             <artifactId>jpa</artifactId>
-            <version>1.0-DB-SNAPSHOT</version>
+            <version>1.0-DB-UnitTesting-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
