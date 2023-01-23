@@ -11,6 +11,9 @@ COPY business/pom.xml /business/pom.xml
 COPY jpa/src /jpa/src
 COPY jpa/pom.xml /jpa/pom.xml
 
+COPY web/src /web/src
+COPY web/pom.xml /web/pom.xml
+
 RUN mvn clean package
 
 
