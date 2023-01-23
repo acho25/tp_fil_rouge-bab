@@ -30,7 +30,7 @@ public class Match extends Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    @Min(value= 200)
+   // @Min(value= 200)
     @Setter
     int nbrSpectateurs;
 
@@ -40,26 +40,28 @@ public class Match extends Entite {
     @Setter
     Date date;
 
-    @Valid
-    @Size(max = 4)
+    //@Valid
+   // @Size(max = 4)
     @Setter
     @ToString.Exclude
     @OneToMany(mappedBy = "match", cascade = {CascadeType.ALL})
     List<Arbitre> arbitres;
 
-    @Valid
-    @Size(max = 2)
+    //@Valid
+   // @Size(max = 2)
     @Setter
     @ToString.Exclude
-    @OneToMany(mappedBy = "match", cascade = {CascadeType.ALL})
+    @OneToMany
+    @Getter
     List<Equipe> equipes;
 
-    @Valid
-    @Size(max = 22)
+    //@Valid
+   // @Size(max = 22)
     @Setter
     @ToString.Exclude
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToMany(mappedBy = "matches", cascade = {CascadeType.ALL})
+    @Getter
     List<Joueur> joueurs;
 
     @Override

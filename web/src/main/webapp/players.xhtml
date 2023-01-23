@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <f:event type="preRenderView" listener="#{joueurBean.init()}"/>
+
+    <h:head>
+        <p:breadCrumb>
+            <p:menuitem value="Home" outcome="home.xhtml"/>
+            <p:menuitem value="Match" url="match.xhtml"/>
+            <p:menuitem value="Teams" url="teams.xhtml"/>
+            <p:menuitem value="Players" url="players.xhtml"/>
+        </p:breadCrumb>
+</h:head>
+<h:body>
+    <h:body>
+
+
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true" />
+            <h3 style="margin-top:0">players interface</h3>
+            <p:tabView>
+                <p:tab title="list of all players">
+                    <p:dataTable value="#{joueurBean.joueurs}" var="joueur">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Player ID"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{joueur.id}"></h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Player Name"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{joueur.nom}"></h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Player Team"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{joueur.equipe.nomEquipe}"></h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Player Numero"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{joueur.numero}"></h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Player Position"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{joueur.postion}"></h:outputText>
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+                <p:tab title="Add Player"  >
+                    <h:form>
+                        <h:panelGrid columns="3">
+                            <br/>
+                            <h:outputLabel>nom</h:outputLabel>
+                            <h:inputText value="#{joueurBean.joueur.nom}" id="nom" />
+                            <br/>
+                            <br/>
+                            <h:outputLabel>prenom</h:outputLabel>
+                            <h:inputText value="#{joueurBean.joueur.prenom}" id="prenom" />
+                            <br/>
+                            <br/>
+                            <h:outputLabel>numero</h:outputLabel>
+                            <h:inputText value="#{joueurBean.joueur.numero}" id="numero" />
+                            <br/>
+                            <br/>
+                            <h:outputLabel>position</h:outputLabel>
+                            <h:inputText value="#{joueurBean.joueur.postion}" id="position" />
+                            <br/>
+                            <br/>
+                            <h:outputLabel>equipe</h:outputLabel>
+                            <p:selectOneMenu id="city" value="#{joueurBean.joueur.equipeId}">
+                                <f:selectItem itemLabel="Select Team" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{matchBean.equipes}" var="equipe" itemLabel="#{equipe.nomEquipe}" itemValue="#{equipe.id}"/>
+                            </p:selectOneMenu>
+
+
+                            <br/>
+                            <h:commandButton value="Save" action="#{joueurBean.ajouterJoueur(joueurBean.joueur)}"/>
+                        </h:panelGrid>
+                    </h:form>
+
+                </p:tab>
+                <p:tab title="Delete Player">
+                    <p:dataTable value="#{joueurBean.joueurs}" var="joueur2">
+                        <p:column headerText="Name">
+                            <h:outputText value="#{joueur2.nom}"/>
+                        </p:column><p:column>
+                        <p:commandButton value="Delete" action="#{joueurBean.supprimerJoueur(joueur2)}">
+                        </p:commandButton>
+                    </p:column>
+                    </p:dataTable>
+                </p:tab>
+            </p:tabView>
+
+
+        </h:form>
+    </h:body>
+</h:body>
+</html>

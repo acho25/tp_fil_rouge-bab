@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:event type="preRenderView" listener="#{equipeBean.init()}"/>
+
+<h:head>
+    <p:breadCrumb>
+        <p:menuitem value="Home" outcome="home.xhtml"/>
+        <p:menuitem value="Match" url="match.xhtml"/>
+        <p:menuitem value="Teams" url="teams.xhtml"/>
+        <p:menuitem value="Players" url="players.xhtml"/>
+    </p:breadCrumb>
+</h:head>
+<h:body>
+    <h:body>
+
+
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true" />
+            <h3 style="margin-top:0">players interface</h3>
+            <p:tabView>
+                <p:tab title="list of all equipes">
+                    <p:dataTable value="#{equipeBean.equipes}" var="equipe">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Teams ID"/>
+                            </f:facet>
+                            <h:outputText value="#{equipe.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Teams Name"/>
+                            </f:facet>
+                            <h:outputText value="#{equipe.nomEquipe}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:tab>
+                <p:tab title="Add Team"  >
+                    <h:form>
+                        <h:panelGrid columns="3">
+                            <br/>
+                            <h:outputLabel>nom</h:outputLabel>
+
+                            <h:inputText value="#{equipeBean.equipe.nomEquipe}" id="nom" required="true" label="nom">
+                                <f:validateLength minimum="4"/>
+                            </h:inputText>
+                            <br/>
+                            <br/>
+                            <h:commandButton value="Save" action="#{equipeBean.ajouterEquipe(equipeBean.equipe)}"/>
+                        </h:panelGrid>
+                    </h:form>
+
+                </p:tab>
+                <p:tab title="Delete Team">
+                    <p:dataTable value="#{equipeBean.equipes}" var="equipe2">
+                        <p:column headerText="Name">
+                            <h:outputText value="#{equipe2.nomEquipe}"/>
+                        </p:column><p:column>
+                        <p:commandButton value="Delete" action="#{equipeBean.supprimerEquipe(equipe2)}">
+                        </p:commandButton>
+                    </p:column>
+                    </p:dataTable>
+                </p:tab>
+            </p:tabView>
+
+
+        </h:form>
+    </h:body>
+</h:body>
+</html>

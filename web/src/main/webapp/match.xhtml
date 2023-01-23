@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <p:breadCrumb>
+        <p:menuitem value="Home" outcome="home.xhtml"/>
+        <p:menuitem value="Match" url="match.xhtml"/>
+        <p:menuitem value="Teams" url="teams.xhtml"/>
+        <p:menuitem value="Players" url="players.xhtml"/>
+    </p:breadCrumb>
+
+</h:head>
+<h:body>
+    <h:form>
+        <p:growl id="msgs" showDetail="true" />
+        <h3 style="margin-top:0">Matches interface</h3>
+        <p:tabView>
+
+            <p:tab title="list of all Matches">
+
+                <p:dataTable value="#{matchBean.matchs}" var="match" rowSelectMode="single" selection="#{matchBean.selectedMatch}" >
+                    <p:column headerText="ID">
+                            <h:outputText value="Match ID : "/>
+                        <h:outputText value="#{match.id}"/>
+                    </p:column>
+                    <p:column headerText="Teams">
+                        <ui:repeat value="#{match.equipes}" var="equipe">
+                            <h:outputText value="#{equipe.nomEquipe}"/>
+                            <h:outputText value="&nbsp;"/>
+                        </ui:repeat>
+                    </p:column>
+                    <p:column>
+                            <h:outputText value="Match Date"/>
+                        <h:outputText value="#{match.date}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+
+
+
+            </p:tab>
+            <p:tab title="Add Match">
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="menu" value="Select teams: " />
+            <p:selectCheckboxMenu id="menu" value="#{matchBean.match.equipes}" label="teams"
+                                  filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                <f:selectItems value="#{matchBean.equipes}" var="equipe" itemLabel="#{equipe.nomEquipe}" itemValue="#{equipe}"/>
+            </p:selectCheckboxMenu>
+
+            <h:outputLabel for="inline" value="Select date: " />
+            <p:datePicker id="inline" value="#{matchBean.match.date}" inline="true"/>
+            <h:outputLabel for="nbspec" value="Select nb spectators: " />
+            <p:spinner id="nbspec" value="#{matchBean.match.nbrSpectateurs}" min="200" />
+            <h:commandButton value="Add" action="#{matchBean.ajouterMatch(matchBean.match)}"/>
+        </h:panelGrid>
+            </p:tab>
+            <p:tab title="Delete Match">
+                <p:dataTable value="#{matchBean.matchs}" var="matchs2">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{matchs2.id}"/>
+                    </p:column>
+                    <p:column headerText="Teams">
+                        <ui:repeat value="#{matchs2.equipes}" var="equipe">
+                            <h:outputText value="#{equipe.nomEquipe}"/>
+                            <h:outputText value="&nbsp;"/>
+                        </ui:repeat>
+                    </p:column>
+                    <p:column headerText="Date">
+                        <h:outputText value="#{matchs2.date}"/>
+                    </p:column>
+                    <p:column>
+                    <p:commandButton value="Delete" action="#{matchBean.supprimerMatch(matchs2)}">
+                    </p:commandButton>
+                </p:column>
+                </p:dataTable>
+
+            </p:tab>
+
+        </p:tabView>
+
+    </h:form>
+</h:body>
+</html>

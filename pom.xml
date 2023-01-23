@@ -139,6 +139,14 @@
             <version>3.0.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/jakarta.faces/jakarta.faces-api -->
+        <dependency>
+            <groupId>jakarta.faces</groupId>
+            <artifactId>jakarta.faces-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+
         <!-- Implementation -->
 
         <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->

@@ -48,7 +48,12 @@ public class Joueur extends Personne{
     @ManyToOne
     //@JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "EQUIPE_ID")
+    @Getter
     Equipe equipe;
+
+    @Getter
+    @Setter
+    int equipeId;
 
     //@Valid
     @Setter

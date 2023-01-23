@@ -23,6 +23,8 @@ public class PersonneBean {
     @Setter
     @Getter
     private Personne personne;
+
+
     public PersonneBean() {
         personne = new Personne();
     }

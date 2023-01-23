@@ -27,32 +27,34 @@ import java.util.Objects;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
 @Entity
-@Table(name = "Equipe", uniqueConstraints = {@UniqueConstraint(name = "uniqueEquipe", columnNames = {"nomEquipe", "entraineur_id",
-})})
+//@Table(name = "Equipe", uniqueConstraints = {@UniqueConstraint(name = "uniqueEquipe", columnNames = {"nomEquipe", "entraineur_id",
+//})})
 public class Equipe extends Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+            @Setter
+            @Getter
     int id;
     @NotNull
-    @CheckCase(CaseMode.UPPER)
+    //@CheckCase(CaseMode.UPPER)
     @Setter
     String nomEquipe;
 
-    @Valid
+   // @Valid
     @Setter
     @JsonIdentityReference(alwaysAsId = true)
     @OneToOne
     @JoinColumn(name = "ENTRAINEUR_ID", referencedColumnName = "ID")
     Entraineur entraineur;
 
-    @Valid
+   // @Valid
     @Size(max = 14)
     @Setter
     @ToString.Exclude
     @OneToMany(mappedBy = "equipe", cascade = {CascadeType.ALL})
     List<Joueur> joueurs;
 
-    @Valid
+   // @Valid
     @Setter
     @ManyToOne(cascade = {CascadeType.ALL})
     @JsonIdentityReference(alwaysAsId = true)

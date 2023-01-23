@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="https://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <f:event type="preRenderView" listener="#{personneBean.init()}"/>
+    <f:event type="preRenderView" listener="#{matchBean.init()}"/>
+
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:head>
+        <p:breadCrumb>
+            <p:menuitem value="Home" outcome="home.xhtml"/>
+            <p:menuitem value="Match" url="match.xhtml"/>
+            <p:menuitem value="Teams" url="teams.xhtml"/>
+            <p:menuitem value="Players" url="players.xhtml"/>
+        </p:breadCrumb>
+
+    </h:head>
+    <h:body>
+
+    </h:body>
+</ui:composition>
